@@ -1,0 +1,47 @@
+
+---
+
+## .gitignore (covers both branches)
+
+```gitignore
+# --- Editors / OS ---
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# --- Simulation waveforms / logs ---
+*.vcd
+*.fst
+*.wlf
+*.log
+*.jou
+*.rpt
+*.key
+
+# --- GHDL / VHDL build artifacts ---
+work-obj*.cf
+*.cf
+*.o
+
+# --- Verilator artifacts ---
+obj_dir/
+*.d
+*.a
+*.so
+*.exe
+*.out
+
+# --- Generic build dirs ---
+build/
+dist/
+sim/
+
+# --- Python (if used for generators/checkers later) ---
+__pycache__/
+*.pyc
+
+# --- Misc ---
+*.bak
