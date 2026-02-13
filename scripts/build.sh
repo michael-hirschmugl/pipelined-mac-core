@@ -14,7 +14,7 @@ SIM_DIR="$ROOT_DIR/sim"
 # ------------------------------------------------------------
 STD="08"
 TOP="tb_mac"
-STOP_TIME="200ns"
+STOP_TIME="${STOP:-500ns}"
 VCD_FILE="$SIM_DIR/mac_sim.vcd"
 
 # Source files
