@@ -1,5 +1,5 @@
 `timescale 1ns/1ps
-// Simple pipelined MAC with frame boundary via eof
+
 module mac #(
   parameter int A_WIDTH   = 8,
   parameter int B_WIDTH   = 8,
