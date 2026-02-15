@@ -3,6 +3,8 @@
 A small, accelerator-style multiply–accumulate (MAC) compute core designed as a pipelined RTL block.
 The repository contains a VHDL implementation and a SystemVerilog port on separate branches.
 
+![MAC block diagram](docs/simple-mac.drawio.png)
+
 ## Features (design overview)
 
 - Signed 8-bit operands (`a`, `b`) with a wider signed accumulation/result path.
@@ -45,31 +47,26 @@ scripts/ # build/run helpers (if used)
 ### Run simulation
 
 From the repository root:
-
 ```bash
-# Either run the provided script (if present)
-./build_mac.sh
-
-# Or do the equivalent manually (example)
-ghdl -a --std=08 rtl/mac.vhd
-ghdl -a --std=08 tb/tb_mac.vhd
-ghdl -e --std=08 tb_mac
-ghdl -r --std=08 tb_mac --stop-time=200ns --vcd=mac_sim.vcd
-On success, the run produces a VCD waveform file (e.g. mac_sim.vcd) and the testbench should complete without errors.
+make sim
 ```
+Expected outcome:
+- The build completes without errors.
+- The simulation prints a clear PASS/FAIL.
+- Optionally, a waveform file is emitted (if enabled in the Makefile/testbench).
 
 ### View waveform (optional)
 ```bash
 gtkwave mac_sim.vcd
 ```
 
-### Quick start (SystemVerilog branch)
-#### Prerequisites
+## Quick start (SystemVerilog branch)
+### Prerequisites
 - Verilator (recent version recommended)
 - A C++ compiler toolchain (e.g., GCC/Clang)
 - Make
 
-#### Run simulation
+### Run simulation
 From the repository root:
 ```bash
 make sim
@@ -79,14 +76,14 @@ Expected outcome:
 - The simulation prints a clear PASS/FAIL.
 - Optionally, a waveform file is emitted (if enabled in the Makefile/testbench).
 
-### Build targets (recommended)
+## Build targets
 Both branches should aim to provide:
 
 - `make sim` — build + run simulation
 - `make clean` — remove generated build artifacts
 - `make wave` — optional convenience target to open the waveform (if a viewer is available)
 
-### Design contracts and assumptions
+## Design contracts and assumptions
 To keep the RTL simple and synthesizable, the following assumptions typically apply:
 
 - When `enable = 0` (stall), the input source holds `a`, `b`, `valid_in`, and `eof` stable until `enable` returns to 1.
@@ -95,12 +92,11 @@ To keep the RTL simple and synthesizable, the following assumptions typically ap
 
 The testbench(s) should explicitly check these behaviors and the latency/valid alignment of `valid_out`.
 
-### Roadmap
-- SystemVerilog port with identical cycle behavior to the VHDL reference
+## Roadmap
 - Assertions (SV immediate assertions first, then SVA properties)
 - More systematic self-checking (randomized vectors + golden reference)
 - Optional: ready/valid streaming wrapper + buffering (FIFO/backpressure) as an extension
 
-### License
+## License
 
 GPL-2.0-or-later. See LICENSE.
